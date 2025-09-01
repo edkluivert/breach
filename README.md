@@ -12,7 +12,7 @@ The app integrates multiple features, including blogs, authentication, and home 
 * **Authentication**: Secure login with token-based persistence.
 * **Blog Module**: Fetches, displays, and streams real-time blog updates.
 * **State Management**: Consistent UI logic handled through **BLoC / Cubit**.
-* **Local Data Layer**: Token storage, caching, and offline support.
+* **Local Data Layer**: Token storage and minor caching.
 * **Error Handling & Logging**: Centralized `AppLogger` utility for debugging.
 
 ## WebSocket Integration
@@ -30,7 +30,7 @@ The app includes a **real-time stream** of blog posts via a WebSocket connection
 * **BLoC / Cubit** for state management
 * **Injectable + GetIt** for DI
 * **WebSocketChannel** for real-time updates
-* **Hive / Local Storage** for persistence
+* **Secure storage** for managing token and user data
 
 ## Project Structure
 
