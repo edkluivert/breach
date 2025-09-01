@@ -1,16 +1,68 @@
-# breach
 
-A new Flutter project.
+# Breach App
+
+## Overview
+
+Breach is a Flutter application designed with a modular architecture and clean state management using **BLoC** and **dependency injection** via `injectable`.
+
+The app integrates multiple features, including blogs, authentication, and home modules, while maintaining a scalable folder structure for future growth.
+
+## Key Features
+
+* **Authentication**: Secure login with token-based persistence.
+* **Blog Module**: Fetches, displays, and streams real-time blog updates.
+* **State Management**: Consistent UI logic handled through **BLoC / Cubit**.
+* **Local Data Layer**: Token storage, caching, and offline support.
+* **Error Handling & Logging**: Centralized `AppLogger` utility for debugging.
+
+## WebSocket Integration
+
+The app includes a **real-time stream** of blog posts via a WebSocket connection.
+
+* Establishes connection with a user token.
+* Listens for new messages and updates the UI live.
+* Handles connection lifecycle (`connecting → connected → disconnected`).
+* **Auto-reconnects** when the connection drops.
+
+## Tech Stack
+
+* **Flutter** (cross-platform)
+* **BLoC / Cubit** for state management
+* **Injectable + GetIt** for DI
+* **WebSocketChannel** for real-time updates
+* **Hive / Local Storage** for persistence
+
+## Project Structure
+
+```
+lib/
+ ├── core/              # Common utilities, error handling, local data
+ ├── features/
+ │    ├── auth/         # Authentication
+ │    ├── blog/         # Blog (presentation, sockets, UI)
+ │    └── home/         # Home module
+ └── main.dart          # App entry point
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository
 
-A few resources to get you started if this is your first Flutter project:
+   ```bash
+   git clone https://github.com/your-org/breach.git
+   cd breach
+   ```
+2. Install dependencies
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+   ```bash
+   flutter pub get
+   ```
+3. Run the app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   flutter run
+   ```
+
+---
+
+Would you like me to also include a **"Contributing" section** (so future devs know how to add new features/modules), or should we keep it strictly **project overview + setup**?
