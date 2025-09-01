@@ -49,7 +49,7 @@ lib/
 1. Clone the repository
 
    ```bash
-   git clone https://github.com/your-org/breach.git
+   git clone https://github.com/edkluivert/breach.git
    cd breach
    ```
 2. Install dependencies
@@ -65,4 +65,3 @@ lib/
 
 ---
 
-Would you like me to also include a **"Contributing" section** (so future devs know how to add new features/modules), or should we keep it strictly **project overview + setup**?
