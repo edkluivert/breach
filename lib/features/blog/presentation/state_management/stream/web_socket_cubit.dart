@@ -15,9 +15,10 @@ class WebSocketCubit extends Cubit<WebSocketState> {
 
   WebSocketChannel? _channel;
   final GetLoggedInUserToken getLoggedInUserToken;
-
   final List<BlogEntity> _blogs = [];
+  bool _isManuallyDisconnected = false;
 
+  /// Call this to start or reconnect
   Future<void> connect() async {
     emit(const WebSocketConnecting());
     try {
@@ -27,33 +28,51 @@ class WebSocketCubit extends Cubit<WebSocketState> {
 
       emit(const WebSocketConnected());
       emit(WebSocketMessageList(List.from(_blogs)));
+
       _channel!.stream.listen(
             (event) {
           try {
             final data = jsonDecode(event.toString());
             final blog = BlogModel.fromJson(data as Map<String, dynamic>);
-            _blogs.add(blog);
+            _blogs..add(blog)
+
+            ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
             emit(WebSocketMessageList(List.from(_blogs)));
           } catch (error) {
             AppLogger.d('Failed to parse blog: $error');
           }
         },
-        onError: (dynamic error) => emit(WebSocketError(error.toString())),
-        onDone: () => emit(const WebSocketDisconnected()),
+        onError: (dynamic error) {
+          emit(WebSocketError(error.toString()));
+          _reconnectIfNeeded();
+        },
+        onDone: () {
+          emit(const WebSocketDisconnected());
+          _reconnectIfNeeded();
+        },
       );
     } catch (e) {
       emit(WebSocketError(e.toString()));
+      await _reconnectIfNeeded();
+    }
+  }
+
+  Future<void> _reconnectIfNeeded({int delaySeconds = 5}) async {
+    if (!_isManuallyDisconnected) {
+      AppLogger.d('WebSocket disconnected. Reconnecting in $delaySeconds seconds...');
+      await Future<void>.delayed(Duration(seconds: delaySeconds));
+      await connect();
     }
   }
 
   void sendMessage(dynamic data) {
     if (_channel != null) {
-      final json = jsonEncode(data);
-      _channel!.sink.add(json);
+      _channel!.sink.add(jsonEncode(data));
     }
   }
 
   void disconnect() {
+    _isManuallyDisconnected = true;
     _channel?.sink.close();
     emit(const WebSocketDisconnected());
   }
@@ -63,4 +82,5 @@ class WebSocketCubit extends Cubit<WebSocketState> {
     emit(const WebSocketInitial());
   }
 }
+
 

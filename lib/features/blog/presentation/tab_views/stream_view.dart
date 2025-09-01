@@ -58,14 +58,14 @@ class StreamView extends StatelessWidget {
                 ),
               );
             }else if (state is WebSocketMessageList) {
-              final sortedBlogs = List<BlogEntity>.from(state.blogs)
-                ..sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
 
-              if(sortedBlogs.isEmpty){
-                return Text(
-                  'No updates at the moment',
-                  style: context.textThemeC.bodyNormal16Bold?.copyWith(
-                    color: AppColors.textColor,
+              if(state.blogs.isEmpty){
+                return Center(
+                  child: Text(
+                    'No updates at the moment',
+                    style: context.textThemeC.bodyNormal16Bold?.copyWith(
+                      color: AppColors.textColor,
+                    ),
                   ),
                 );
               }
@@ -75,14 +75,14 @@ class StreamView extends StatelessWidget {
                     await webSocketCubit.connect();
                   },
                   child: ListView.separated(
-                    itemCount: sortedBlogs.length,
+                    itemCount: state.blogs.length,
                     padding: const EdgeInsets.only(
                       left: kDefaultPadding, right: kDefaultPadding,
                       top: 10,
                     ),
                     itemBuilder: (context, index) {
                       return StreamItem(
-                        blogEntity: sortedBlogs[index],
+                        blogEntity: state.blogs[index],
                       );
                     },
                     separatorBuilder: (context, index) {
