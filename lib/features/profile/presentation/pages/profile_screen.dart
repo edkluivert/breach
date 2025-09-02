@@ -106,7 +106,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           style: context.textThemeC.bodyNormal16Bold?.copyWith(
                             color: AppColors.grey600,
                             fontFamily: Fonts.spaceGrotesk,
-                            height: 1.4,
+                            fontSize: 12,
                           ),
                         ),
                         uiHelper.verticalSpace(30),

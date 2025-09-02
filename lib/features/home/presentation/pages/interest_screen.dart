@@ -134,7 +134,7 @@ class _InterestScreenState extends State<InterestScreen> {
                                         color: isSelected
                                             ? AppColors.white
                                             : AppColors.textColor,
-                                        fontSize: 14,
+                                        fontSize: 12,
                                       ),
                                     ),
                                     label: Text(
@@ -144,7 +144,7 @@ class _InterestScreenState extends State<InterestScreen> {
                                         color: isSelected
                                             ? AppColors.white
                                             : AppColors.textColor,
-                                        fontSize: 14,
+                                        fontSize: 12,
                                       ),
                                     ),
                                     checkmarkColor: isSelected
@@ -210,9 +210,9 @@ class _InterestScreenState extends State<InterestScreen> {
                       },
                     ),
                   ),
-
+                  uiHelper.verticalSpace(20),
                   if (!widget.userProfile) ...[
-                    uiHelper.verticalSpace(20),
+
                     ClickableWidget(
                       onTap: handleSkip,
                       child: Text(

@@ -80,7 +80,7 @@ class InterestSection extends StatelessWidget {
                         style: context.textThemeC.bodyNormal16Bold
                             ?.copyWith(
                           color: AppColors.textColor,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                       label: Text(
@@ -88,7 +88,7 @@ class InterestSection extends StatelessWidget {
                         style: context.textThemeC.bodyNormal16Bold
                             ?.copyWith(
                           color: AppColors.textColor,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                       backgroundColor: AppColors.white,
