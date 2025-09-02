@@ -52,7 +52,7 @@ class _PopularViewState extends State<PopularView> with AutomaticKeepAliveClient
                 );
               },
               separatorBuilder: (context, index) {
-                return uiHelper.verticalSpace(10);
+                return uiHelper.verticalSpace(14);
               },
             ),
           );

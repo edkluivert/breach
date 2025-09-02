@@ -52,7 +52,7 @@ class _FeaturedViewState extends State<FeaturedView> with AutomaticKeepAliveClie
                );
              },
              separatorBuilder: (context, index) {
-               return uiHelper.verticalSpace(10);
+               return uiHelper.verticalSpace(14);
              },
            ),
          );

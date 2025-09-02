@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListView(
                       children: [
                         PostBanner(blogEntity: posts.first),
-                        uiHelper.verticalSpace(50),
+                        uiHelper.verticalSpace(20),
                         Text(
                           AppStrings.recent,
                           style: context.textThemeC.bodySmall14Regular
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return PostItem(blogEntity: post);
                           },
                           separatorBuilder: (context, index) =>
-                              uiHelper.verticalSpace(10),
+                              uiHelper.verticalSpace(14),
                         ),
                       ],
                     ),

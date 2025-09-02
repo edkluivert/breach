@@ -1,7 +1,8 @@
 
 import 'package:breach/features/features.dart';
 import 'package:breach/features/home/domain/entities/blog_entity.dart';
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class PostDetailScreen extends StatelessWidget {
   const PostDetailScreen({required this.post, super.key});
@@ -26,16 +27,33 @@ class PostDetailScreen extends StatelessWidget {
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
                     ),
-                    child: FastCachedImage(
-                      url: post.imageUrl ?? '',
+                    child: CachedNetworkImage(
+                      imageUrl: post.imageUrl ?? '',
                       fit: BoxFit.cover,
                       fadeInDuration: const Duration(milliseconds: 300),
-                      loadingBuilder: (context, progress) {
-                        return const Center(
-                          child: CustomCircularProgressIndicator(),
+                      progressIndicatorBuilder: (context,url, progress) {
+                        return ColoredBox(
+                          color: AppColors.secondaryPrimaryColor,
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              if (url.isEmpty && progress.totalSize != null)
+                                Text(
+                                  '${progress.downloaded ~/ 1024} / ${progress.totalSize! ~/ 1024} kb',
+                                  style: context.textThemeC.bodySmall14Regular?.copyWith(
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              const SizedBox(
+                                width: 120,
+                                height: 120,
+                                child: CustomCircularProgressIndicator(),
+                              ),
+                            ],
+                          ),
                         );
                       },
-                      errorBuilder: (context, exception, stacktrace) {
+                      errorWidget: (context, exception, stacktrace) {
                         return const Center(child: Icon(Icons.error));
                       },
                     ),

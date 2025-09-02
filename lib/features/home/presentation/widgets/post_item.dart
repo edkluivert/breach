@@ -1,7 +1,8 @@
 import 'package:breach/core/core.dart';
 import 'package:breach/features/features.dart';
 import 'package:breach/features/home/domain/entities/blog_entity.dart';
-import 'package:fast_cached_network_image/fast_cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+
 
 class PostItem extends StatelessWidget {
   const PostItem({
@@ -14,29 +15,32 @@ class PostItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uiHelper = UiHelper(context);
-    return ClickableWidget(
-      borderRadius: 16,
-      onTap: (){
-        Navigator.pushNamed(
-          context,
-          Routes.postDetail,
-          arguments: blogEntity,
-        );
-      },
-      child: IntrinsicHeight(
+    return SizedBox(
+      height: 200,
+      child: ClickableWidget(
+        borderRadius: 16,
+        onTap: () {
+          Navigator.pushNamed(
+            context,
+            Routes.postDetail,
+            arguments: blogEntity,
+          );
+        },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           spacing: 12,
           children: [
+
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: SizedBox(
                 width: 200,
-                child: FastCachedImage(
-                  url: blogEntity.imageUrl ?? '',
+                height: 200,
+                child: CachedNetworkImage(
+                  imageUrl: blogEntity.imageUrl ?? '',
                   fit: BoxFit.cover,
                   fadeInDuration: const Duration(seconds: 1),
-                  errorBuilder: (context, exception, stacktrace) {
+                  errorWidget: (context, exception, stacktrace) {
                     return Center(
                       child: Text(
                         'Error loading image',
@@ -46,64 +50,68 @@ class PostItem extends StatelessWidget {
                       ),
                     );
                   },
-                  loadingBuilder: (context, progress) {
+                  progressIndicatorBuilder: (context, url, progress) {
                     return ColoredBox(
                       color: AppColors.secondaryPrimaryColor,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          if (progress.isDownloading && progress.totalBytes != null)
-                            Text(
-                              '${progress.downloadedBytes ~/ 1024} / ${progress.totalBytes! ~/ 1024} kb',
-                              style: context.textThemeC.bodySmall14Regular?.copyWith(
-                                color: AppColors.white,
-                              ),
-                            ),
-                          const SizedBox(
-                            width: 120,
-                            height: 120,
-                            child: CustomCircularProgressIndicator(),
-                          ),
-                        ],
+                      child: const Center(
+                        child: SizedBox(
+                          width: 40,
+                          height: 40,
+                          child: CustomCircularProgressIndicator(),
+                        ),
                       ),
                     );
                   },
                 ),
               ),
             ),
+
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   Text(
-                    blogEntity.series!.name ?? 'N/A',
+                    blogEntity.series?.name ?? 'N/A',
                     style: context.textThemeC.bodySmall14Regular?.copyWith(
                       color: AppColors.grey600,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   uiHelper.verticalSpace(8),
+
                   Text(
                     blogEntity.title ?? 'N/A',
                     style: context.textThemeC.bodySmall14Regular?.copyWith(
                       color: AppColors.grey600,
-                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   uiHelper.verticalSpace(4),
-                  Text(
-                    blogEntity.content ?? 'N/A',
-                    style: context.textThemeC.bodySmall14Regular?.copyWith(
-                      color: AppColors.grey600,
-                      fontSize: 16,
+
+                  Expanded(
+                    child: Text(
+                      blogEntity.content ?? 'N/A',
+                      style: context.textThemeC.bodySmall14Regular?.copyWith(
+                        color: AppColors.grey600,
+                        fontSize: 12,
+                      ),
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
+
                   uiHelper.verticalSpace(4),
+
                   Wrap(
                     spacing: 8,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       Text(
-                        blogEntity.author!.name ?? 'N/A',
+                        blogEntity.author?.name ?? 'N/A',
                         style: context.textThemeC.bodySmall14Regular?.copyWith(
                           color: AppColors.textColor,
                           fontSize: 11,
@@ -115,7 +123,7 @@ class PostItem extends StatelessWidget {
                         size: 8,
                       ),
                       Text(
-                        blogEntity.createdAt!.toFormattedDate(),
+                        blogEntity.createdAt?.toFormattedDate() ?? '',
                         style: context.textThemeC.bodySmall14Regular?.copyWith(
                           color: AppColors.textColor,
                           fontSize: 11,
@@ -132,3 +140,4 @@ class PostItem extends StatelessWidget {
     );
   }
 }
+
