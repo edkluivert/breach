@@ -132,7 +132,9 @@ class AppTheme {
       ),
       colorScheme: theme.colorScheme
           .copyWith(
-            primary: AppColors.primaryColor,
+        primary: AppColors.secondaryPrimaryColor,
+        surface: AppColors.secondaryPrimaryColor,
+        onSurface: AppColors.white,
           )
           .copyWith(surface: AppColors.backgroundColor),
     );
