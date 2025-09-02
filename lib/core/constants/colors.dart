@@ -10,7 +10,7 @@ class AppColors {
   static const grey = Color(0xFF9CA3AF);
   static const inputBorder = Color(0xFFE7E7E7);
   static const textLight = Color(0xFF6D7280);
-  static const grey400  = Color(0xFFB2B2B2);
+  static const grey400 = Color(0xFFB2B2B2);
   static const textColor = Color(0xFF181818);
   static const backgroundColor = Color(0xFFFFFFFF);
   static const successColor = Color(0xFF27790A);
@@ -24,5 +24,4 @@ class AppColors {
   static const success600 = Color(0xFF16A34A);
   static const star = Color(0xFFFED954);
   static const secondary600 = Color(0xFF0474C5);
-
 }
