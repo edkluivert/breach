@@ -74,9 +74,9 @@ class _LogoutConfirmationDialogState extends State<LogoutConfirmationDialog> {
                 Expanded(
                   child: BusyButton(
                     onPressed: () {
-                      appBottomNavCubit.reset();
                       authBloc.add(LogoutRequested());
                       navigationService.removeAllAndNavigateTo(Routes.login);
+                      appBottomNavCubit.reset();
                     },
                     title: 'Logout',
                     color: AppColors.red,
