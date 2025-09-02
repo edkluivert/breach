@@ -5,9 +5,10 @@
 import 'package:breach/core/navigation/route_paths.dart';
 import 'package:breach/features/app_bottom_nav/presentation/pages/app_bottom_nav_screen.dart';
 import 'package:breach/features/authentication/presentation/pages/login/login_screen.dart';
-import 'package:breach/features/home/presentation/pages/interest_screen.dart';
 import 'package:breach/features/authentication/presentation/pages/sign_up/sign_up_screen.dart';
 import 'package:breach/features/authentication/presentation/pages/sign_up/welcome_screen.dart';
+import 'package:breach/features/home/domain/entities/blog_entity.dart';
+import 'package:breach/features/home/presentation/pages/post_detail_screen.dart';
 import 'package:breach/features/splash/presentation/pages/get_started_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,34 +22,35 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case Routes.getStarted:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: GetStartedScreen(),
+        viewToShow: const GetStartedScreen(),
       );
     case Routes.signup:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: SignUpScreen(),
+        viewToShow: const SignUpScreen(),
       );
     case Routes.login:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: LoginScreen(),
+        viewToShow: const LoginScreen(),
       );
     case Routes.welcome:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: WelcomeScreen(),
+        viewToShow: const WelcomeScreen(),
       );
-    // case Routes.interests:
-    //   return _getPageRoute(
-    //     routeName: settings.name,
-    //     viewToShow: InterestScreen(
-    //       onResult: (){},
-    //     ),
-    //   );
+    case Routes.postDetail:
+      final args = settings.arguments;
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: PostDetailScreen(
+            post: args! as BlogEntity,
+        ),
+      );
     case Routes.appBottomNav:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: AppBottomNavScreen()
+        viewToShow: const AppBottomNavScreen()
       );
     default:
       return MaterialPageRoute(

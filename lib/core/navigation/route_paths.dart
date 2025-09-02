@@ -6,5 +6,6 @@ class Routes {
   static const welcome = '/welcome';
   static const appBottomNav = '/appBottomNav';
   static const interests = '/interests';
+  static const postDetail = '/postDetail';
 
 }
