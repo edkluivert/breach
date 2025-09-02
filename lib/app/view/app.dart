@@ -1,4 +1,3 @@
-import 'package:breach/core/constants/colors.dart';
 import 'package:breach/core/injections/injection.dart';
 import 'package:breach/core/logger/app_logger.dart';
 import 'package:breach/core/navigation/navigation_service.dart';
@@ -9,9 +8,7 @@ import 'package:breach/features/authentication/presentation/state_management/aut
 import 'package:breach/features/authentication/presentation/state_management/auth/auth_event.dart';
 import 'package:breach/features/authentication/presentation/state_management/auth/auth_state.dart';
 import 'package:breach/features/features.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class App extends StatelessWidget {

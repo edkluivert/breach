@@ -76,6 +76,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         CircleAvatar(
                           radius: 80,
                           backgroundImage: AssetImage(Assets.beaverDp.png),
+                        ).animate().scale(
+                          duration: 5.seconds,
+                          begin: const Offset(0.5, 0.5),
+                          end: const Offset(1, 1),
+                          curve: Curves.easeOutBack,
                         ),
                         uiHelper.verticalSpace(12),
                         if(securedUser != null)

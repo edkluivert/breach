@@ -8,4 +8,5 @@ class Assets {
   static const profile = 'profile';
   static const postBanner = 'post_banner';
   static const error = 'error';
+  static const bubble = 'bubble';
 }

@@ -16,9 +16,28 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment:  MainAxisAlignment.center,
             children: [
-              Image.asset(
-                Assets.beaver.png,
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Image.asset(
+                    Assets.beaver.png,
 
+                  ),
+
+                  Positioned(
+                      bottom: 90,
+                      child: Image.asset(
+                          Assets.bubble.png,
+                         width: context.width/2,
+                      ),
+                  ).animate(
+                    effects: [
+                      const SlideEffect(
+                        duration: Duration(milliseconds: 300),
+                      )
+                    ],
+                  ),
+                ],
               ),
               uiHelper.verticalSpace(30),
               Text(AppStrings.welcome,
