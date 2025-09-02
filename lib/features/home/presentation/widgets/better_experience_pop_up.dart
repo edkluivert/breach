@@ -8,6 +8,7 @@ class BetterExperienceDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uiHelper = UiHelper(context);
     final navigationService = sl<NavigationService>();
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -42,11 +43,9 @@ class BetterExperienceDialog extends StatelessWidget {
                 color: AppColors.grey600,
               ),
             ),
-            const SizedBox(height: 20),
+            uiHelper.verticalSpace(20),
             BusyButton(
-              onPressed: (){
-                navigationService.removeAllAndNavigateTo(Routes.appBottomNav);
-              },
+              onPressed: navigationService.pop,
               title: 'Got it',
             ),
           ],

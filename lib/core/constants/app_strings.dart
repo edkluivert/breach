@@ -30,5 +30,6 @@ class AppStrings{
   static const filterBy = 'Filter by';
   static const logOut = 'Log Out';
   static const selectCategory = 'Select a category';
+  static const save = 'Save';
 
 }

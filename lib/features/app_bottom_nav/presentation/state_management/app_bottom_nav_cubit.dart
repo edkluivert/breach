@@ -18,4 +18,9 @@ class AppBottomNavCubit extends Cubit<BottomNavState> {
       emit(BottomNavState(state.index, 50));
     });
   }
+
+  void reset(){
+    emit(BottomNavState(0, 0));
+  }
+
 }

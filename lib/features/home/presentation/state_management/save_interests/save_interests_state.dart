@@ -30,9 +30,8 @@ class SaveInterestsSuccess extends SaveInterestsState {
 
 class SaveInterestsError extends SaveInterestsState {
   const SaveInterestsError(this.failure);
-  final Failure failure;
+  final String failure;
 
   @override
   List<Object?> get props => [failure];
 }
-

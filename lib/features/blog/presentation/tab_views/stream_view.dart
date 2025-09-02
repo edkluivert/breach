@@ -5,9 +5,8 @@ import 'package:breach/features/blog/presentation/state_management/stream/web_so
 import 'package:breach/features/blog/presentation/state_management/stream/web_socket_state.dart';
 import 'package:breach/features/blog/presentation/widgets/stream_item.dart';
 import 'package:breach/features/features.dart';
-import 'package:breach/features/home/domain/entities/blog_entity.dart';
 
-class StreamView extends StatelessWidget {
+class StreamView extends StatefulWidget {
   const StreamView({
     required this.webSocketCubit,
     super.key,
@@ -15,6 +14,11 @@ class StreamView extends StatelessWidget {
 
   final WebSocketCubit webSocketCubit;
 
+  @override
+  State<StreamView> createState() => _StreamViewState();
+}
+
+class _StreamViewState extends State<StreamView> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     final uiHelper = UiHelper(context);
@@ -72,7 +76,7 @@ class StreamView extends StatelessWidget {
               return Expanded(
                 child: RefreshIndicator.adaptive(
                   onRefresh: ()async{
-                    await webSocketCubit.connect();
+                    await widget.webSocketCubit.connect();
                   },
                   child: ListView.separated(
                     itemCount: state.blogs.length,
@@ -94,7 +98,7 @@ class StreamView extends StatelessWidget {
             } else if (state is WebSocketError) {
               return AppErrorWidget(
                 title: state.message,
-                onTap: webSocketCubit.connect,
+                onTap: widget.webSocketCubit.connect,
               );
             }
             return const SizedBox.shrink();
@@ -104,4 +108,7 @@ class StreamView extends StatelessWidget {
     );
 
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

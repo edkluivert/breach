@@ -5,7 +5,7 @@ import 'package:breach/features/features.dart';
 import 'package:breach/features/home/presentation/state_management/post/posts_cubit.dart';
 import 'package:breach/features/home/presentation/widgets/post_item.dart';
 
-class FeaturedView extends StatelessWidget {
+class FeaturedView extends StatefulWidget {
   const FeaturedView({
    required this.postsCubit,
    super.key,
@@ -13,6 +13,11 @@ class FeaturedView extends StatelessWidget {
 
   final PostsCubit postsCubit;
 
+  @override
+  State<FeaturedView> createState() => _FeaturedViewState();
+}
+
+class _FeaturedViewState extends State<FeaturedView> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     final uiHelper = UiHelper(context);
@@ -25,15 +30,15 @@ class FeaturedView extends StatelessWidget {
          );
        }else if(state is PostsError){
          return AppErrorWidget(
-           onTap: postsCubit.loadPosts,
+           onTap: widget.postsCubit.loadPosts,
          );
        }else if(state is PostsLoaded){
          if(state.posts.isEmpty){
-           return EmptyPosts(postsCubit: postsCubit);
+           return EmptyPosts(postsCubit: widget.postsCubit);
          }
          return RefreshIndicator.adaptive(
            onRefresh: ()async{
-             await postsCubit.loadPosts();
+             await widget.postsCubit.loadPosts();
            },
            child: ListView.separated(
              itemCount: state.posts.length,
@@ -57,4 +62,7 @@ class FeaturedView extends StatelessWidget {
       },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

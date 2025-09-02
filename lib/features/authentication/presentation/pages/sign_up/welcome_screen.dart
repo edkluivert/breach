@@ -47,8 +47,9 @@ class WelcomeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => InterestScreen(
+                          userProfile: false,
                           onResult: ()=>navigationService.
-                          removeAllAndNavigateTo(Routes.interests),
+                          removeAllAndNavigateTo(Routes.appBottomNav),
                         ),
                       ),
                     );

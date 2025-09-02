@@ -101,7 +101,7 @@ extension ConfirmNewPasswordValidationErrorX on ConfirmPasswordValidationError {
   String text() {
     switch (this) {
       case ConfirmPasswordValidationError.empty:
-        return 'Please confirm your new password';
+        return 'Please confirm password';
       case ConfirmPasswordValidationError.mismatch:
         return 'Passwords do not match';
     }

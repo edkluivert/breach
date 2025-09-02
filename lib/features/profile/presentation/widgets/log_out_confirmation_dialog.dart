@@ -1,4 +1,5 @@
 import 'package:breach/core/core.dart';
+import 'package:breach/features/app_bottom_nav/presentation/state_management/app_bottom_nav_cubit.dart';
 import 'package:breach/features/authentication/presentation/state_management/auth/auth_bloc.dart';
 import 'package:breach/features/authentication/presentation/state_management/auth/auth_event.dart';
 import 'package:breach/features/features.dart';
@@ -11,13 +12,14 @@ class LogoutConfirmationDialog extends StatefulWidget {
 }
 
 class _LogoutConfirmationDialogState extends State<LogoutConfirmationDialog> {
-
+  late AppBottomNavCubit appBottomNavCubit;
   late AuthBloc authBloc;
 
   @override
   void initState() {
     super.initState();
     authBloc = sl<AuthBloc>();
+    appBottomNavCubit = sl<AppBottomNavCubit>();
   }
 
   @override
@@ -72,6 +74,7 @@ class _LogoutConfirmationDialogState extends State<LogoutConfirmationDialog> {
                 Expanded(
                   child: BusyButton(
                     onPressed: () {
+                      appBottomNavCubit.reset();
                       authBloc.add(LogoutRequested());
                       navigationService.removeAllAndNavigateTo(Routes.login);
                     },
