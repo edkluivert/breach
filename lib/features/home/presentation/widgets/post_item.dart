@@ -51,9 +51,9 @@ class PostItem extends StatelessWidget {
                     );
                   },
                   progressIndicatorBuilder: (context, url, progress) {
-                    return ColoredBox(
+                    return const ColoredBox(
                       color: AppColors.secondaryPrimaryColor,
-                      child: const Center(
+                      child: Center(
                         child: SizedBox(
                           width: 40,
                           height: 40,
